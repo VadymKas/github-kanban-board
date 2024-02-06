@@ -15,8 +15,10 @@ const { Search } = Input;
 
 const InputField: React.FC = () => {
   const dispatch = useAppDispatch();
-  const urlValue = useSelector(url);
+  const repoURL = useSelector(url);
   const statusValue = useSelector(status);
+
+  const profileURL: string = repoURL.split('/').slice(0, -1).join('/');
 
   const inputValueHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setUrl(e.target.value));
@@ -35,18 +37,34 @@ const InputField: React.FC = () => {
           enterButton='Load'
           onSearch={getIssues}
           onChange={inputValueHandler}
-          value={urlValue}
+          value={repoURL}
           style={{ minWidth: '400px' }}
         />
       </Space>
-      <Button
-        type='link'
-        href={urlValue}
-        target='_blank'
-        style={{ padding: '20px 0 10px' }}
-        disabled={statusValue === 'success' ? false : true}>
-        Repo link
-      </Button>
+      <Flex
+        justify='center'
+        align='center'
+        style={{ margin: '15px 0 0' }}>
+        <Button
+          type='link'
+          href={profileURL}
+          target='_blank'
+          disabled={statusValue === 'success' ? false : true}>
+          {statusValue === 'success'
+            ? profileURL.split('/').slice(-1)
+            : 'Profile link'}
+        </Button>
+        <span>&#62;</span>
+        <Button
+          type='link'
+          href={repoURL}
+          target='_blank'
+          disabled={statusValue === 'success' ? false : true}>
+          {statusValue === 'success'
+            ? repoURL.split('/').slice(-1)
+            : 'Repo link'}
+        </Button>
+      </Flex>
     </Flex>
   );
 };

@@ -29,7 +29,7 @@ const CardBlock = () => {
 
     let column = issueCols?.find((col) => col.id === source.droppableId);
     const issues = column?.issues;
-    const issue = issues?.find((issue) => issue.number == draggableId);
+    const issue = issues?.find((issue) => issue.number === +draggableId);
     issues?.splice(source.index, 1);
     issues?.splice(destination.index, 0, issue as CardProps);
 
