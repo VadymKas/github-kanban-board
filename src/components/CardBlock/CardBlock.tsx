@@ -46,20 +46,22 @@ const CardBlock = () => {
   const issueCols: CardCol[] = [
     {
       id: 'ToDo',
-      issues: allIssues.filter(
+      issues: allIssues?.filter(
         (issue: FetchProps) =>
           issue.state === 'open' && !issue.assignees.length,
       ),
     },
     {
       id: 'InProgress',
-      issues: allIssues.filter(
+      issues: allIssues?.filter(
         (issue: FetchProps) => issue.state === 'open' && issue.assignees.length,
       ),
     },
     {
       id: 'Done',
-      issues: allIssues.filter((issue: FetchProps) => issue.state === 'closed'),
+      issues: allIssues?.filter(
+        (issue: FetchProps) => issue.state === 'closed',
+      ),
     },
   ];
 

@@ -9,18 +9,23 @@ const getURLParams = (url: string): string => url.split(BASE_URL)[1];
 
 export const fetchIssues = createAsyncThunk(
   'issues/fetchIssues',
-  async (params: string) => {
-    const repo = getURLParams(params);
+  async (params: string, { rejectWithValue }) => {
+    try {
+      const repo = getURLParams(params);
 
-    const { data } = await axios(
-      `${API_URL}${repo}/issues?per_page=100&state=all`,
-    );
+      const { data } = await axios(
+        `${API_URL}${repo}/issues?per_page=100&state=all`,
+      );
 
-    return data;
+      return data;
+    } catch (err) {
+      return rejectWithValue(err);
+    }
   },
 );
 
 const initialState: IssuesSliceState = {
+  input: '',
   url: '',
   issues: [],
   status: 'loading',
@@ -30,14 +35,16 @@ const issuesSlice = createSlice({
   name: 'issues',
   initialState,
   reducers: {
-    setUrl: (state, action: PayloadAction<string>) => {
-      state.url = action.payload;
+    setInputValue: (state, action: PayloadAction<string>) => {
+      state.input = action.payload;
+      state.status = 'loading';
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchIssues.pending, (state) => {
         state.status = 'loading';
+        state.url = state.input;
         state.issues = [];
       })
       .addCase(fetchIssues.fulfilled, (state, action: PayloadAction<[]>) => {
@@ -51,10 +58,11 @@ const issuesSlice = createSlice({
   },
 });
 
-export const { setUrl } = issuesSlice.actions;
+export const { setInputValue } = issuesSlice.actions;
 
 export default issuesSlice.reducer;
 
-export const issues = (state: RootState) => state.issuesSlice.issues;
+export const input = (state: RootState) => state.issuesSlice.input;
 export const url = (state: RootState) => state.issuesSlice.url;
+export const issues = (state: RootState) => state.issuesSlice.issues;
 export const status = (state: RootState) => state.issuesSlice.status;

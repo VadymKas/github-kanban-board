@@ -25,7 +25,7 @@ const CardCol: React.FC<CardCol> = ({ id, issues }) => {
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}>
-              {issues.map((issue, index) => (
+              {issues?.map((issue, index) => (
                 <CardItem
                   key={issue.number}
                   {...issue}

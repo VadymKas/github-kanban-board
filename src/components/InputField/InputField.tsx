@@ -5,8 +5,9 @@ import { useSelector } from 'react-redux';
 
 import {
   fetchIssues,
-  setUrl,
+  setInputValue,
   url,
+  input,
   status,
 } from '../../redux/slices/issueSlice';
 import { useAppDispatch } from '../../redux/store';
@@ -15,17 +16,19 @@ const { Search } = Input;
 
 const InputField: React.FC = () => {
   const dispatch = useAppDispatch();
+  const inputValue = useSelector(input);
   const repoURL = useSelector(url);
   const statusValue = useSelector(status);
-
+  
   const profileURL: string = repoURL.split('/').slice(0, -1).join('/');
 
   const inputValueHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setUrl(e.target.value));
+    dispatch(setInputValue(e.target.value));
   };
 
   const getIssues: SearchProps['onSearch'] = (value, _e) => {
     dispatch(fetchIssues(value));
+    dispatch(setInputValue(''));
   };
 
   return (
@@ -37,7 +40,7 @@ const InputField: React.FC = () => {
           enterButton='Load'
           onSearch={getIssues}
           onChange={inputValueHandler}
-          value={repoURL}
+          value={inputValue}
           style={{ minWidth: '400px' }}
         />
       </Space>

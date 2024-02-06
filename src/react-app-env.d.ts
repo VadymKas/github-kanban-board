@@ -1,6 +1,7 @@
 /// <reference types="react-scripts" />
 
 type IssuesSliceState = {
+  input: string;
   url: string;
   issues: [];
   status: 'loading' | 'success' | 'error';
