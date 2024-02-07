@@ -18,13 +18,13 @@ const CardCol: React.FC<CardCol> = ({ id, issues }) => {
       md={12}
       lg={8}
       style={{ padding: '16px' }}>
-      <Col style={colStyle}>
-        <h2 style={{ textAlign: 'center' }}>{id}</h2>
-        <Droppable droppableId={id}>
-          {(provided) => (
-            <div
-              ref={provided.innerRef}
-              {...provided.droppableProps}>
+      <Droppable droppableId={id}>
+        {(provided) => (
+          <div
+            ref={provided.innerRef}
+            {...provided.droppableProps}>
+            <Col style={colStyle}>
+              <h2 style={{ textAlign: 'center' }}>{id}</h2>
               {issues?.map((issue, index) => (
                 <CardItem
                   key={issue.number}
@@ -32,11 +32,11 @@ const CardCol: React.FC<CardCol> = ({ id, issues }) => {
                   index={index}
                 />
               ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </Col>
+            </Col>
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
     </Col>
   );
 };

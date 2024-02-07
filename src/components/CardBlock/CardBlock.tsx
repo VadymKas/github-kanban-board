@@ -27,20 +27,30 @@ const CardBlock = () => {
       return;
     }
 
-    let column = issueCols?.find((col) => col.id === source.droppableId);
-    const issues = column?.issues;
-    const issue = issues?.find((issue) => issue.number === +draggableId);
-    issues?.splice(source.index, 1);
-    issues?.splice(destination.index, 0, issue as CardProps);
+    let startColumn = boardData?.find((col) => col.id === source.droppableId);
+    let endColumn = boardData?.find(
+      (col) => col.id === destination.droppableId,
+    );
+    const startIssues = startColumn?.issues;
+    const endIssues = endColumn?.issues;
+    const issue = startIssues?.find((issue) => issue.number === +draggableId);
+    startIssues?.splice(source.index, 1);
+    endIssues?.splice(destination.index, 0, issue as CardProps);
 
-    const newColumn = {
-      ...(column as CardCol),
-      issues: issues as CardProps[],
+    const updatedStartColumn = {
+      ...(startColumn as CardCol),
+      issues: startIssues as CardProps[],
     };
 
-    column = newColumn;
+    const updatedEndColumn = {
+      ...(endColumn as CardCol),
+      issues: endIssues as CardProps[],
+    };
 
-    setBoardData(issueCols);
+    startColumn = updatedStartColumn;
+    endColumn = updatedEndColumn;
+
+    setBoardData(boardData);
   };
 
   const issueCols: CardCol[] = [
