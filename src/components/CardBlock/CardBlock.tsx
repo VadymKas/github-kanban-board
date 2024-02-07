@@ -55,6 +55,7 @@ const CardBlock = () => {
 
   const issueCols: CardCol[] = [
     {
+      name: 'ToDo',
       id: 'ToDo',
       issues: allIssues?.filter(
         (issue: FetchProps) =>
@@ -62,12 +63,14 @@ const CardBlock = () => {
       ),
     },
     {
+      name: 'In Progress',
       id: 'InProgress',
       issues: allIssues?.filter(
         (issue: FetchProps) => issue.state === 'open' && issue.assignees.length,
       ),
     },
     {
+      name: 'Done',
       id: 'Done',
       issues: allIssues?.filter(
         (issue: FetchProps) => issue.state === 'closed',
@@ -77,16 +80,16 @@ const CardBlock = () => {
 
   return (
     <div style={{ width: '100%' }}>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Row>
+      <Row>
+        <DragDropContext onDragEnd={onDragEnd}>
           {boardData?.map((col) => (
             <CardCol
               key={col.id}
               {...col}
             />
           ))}
-        </Row>
-      </DragDropContext>
+        </DragDropContext>
+      </Row>
     </div>
   );
 };
