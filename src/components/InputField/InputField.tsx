@@ -6,9 +6,7 @@ import { useSelector } from 'react-redux';
 import {
   fetchIssues,
   setInputValue,
-  url,
-  input,
-  status,
+  state,
 } from '../../redux/slices/issueSlice';
 import { useAppDispatch } from '../../redux/store';
 
@@ -16,10 +14,12 @@ const { Search } = Input;
 
 const InputField: React.FC = () => {
   const dispatch = useAppDispatch();
-  const inputValue = useSelector(input);
-  const repoURL = useSelector(url);
-  const statusValue = useSelector(status);
-  
+  const {
+    input: inputValue,
+    url: repoURL,
+    status: statusValue,
+  } = useSelector(state);
+
   const profileURL: string = repoURL.split('/').slice(0, -1).join('/');
 
   const inputValueHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

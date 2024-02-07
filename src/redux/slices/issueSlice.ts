@@ -62,6 +62,7 @@ export const { setInputValue } = issuesSlice.actions;
 
 export default issuesSlice.reducer;
 
+export const state = (state: RootState) => state.issuesSlice;
 export const input = (state: RootState) => state.issuesSlice.input;
 export const url = (state: RootState) => state.issuesSlice.url;
 export const issues = (state: RootState) => state.issuesSlice.issues;

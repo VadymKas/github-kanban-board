@@ -31,7 +31,7 @@ type FetchProps = {
 };
 
 type CardCol = {
-  name: string,
+  name: string;
   id: string;
   issues: CardProps[];
 };

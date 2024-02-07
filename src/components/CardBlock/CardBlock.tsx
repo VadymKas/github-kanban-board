@@ -3,16 +3,25 @@ import { Row } from 'antd';
 import { useSelector } from 'react-redux';
 import { DragDropContext } from 'react-beautiful-dnd';
 
-import { issues } from '../../redux/slices/issueSlice';
+import { state } from '../../redux/slices/issueSlice';
 import CardCol from '../CardCol';
+import getIssueCols from './utils';
 
-const CardBlock = () => {
-  const allIssues = useSelector(issues);
+const CardBlock: React.FC = () => {
+  const { issues: allIssues, url } = useSelector(state);
   const [boardData, setBoardData] = useState<CardCol[]>();
 
   useEffect(() => {
-    setBoardData(issueCols);
+    const localData = localStorage.getItem(url);
+
+    if (!localData) {
+      setBoardData(issueCols);
+    } else {
+      setBoardData(JSON.parse(localData));
+    }
   }, [allIssues]);
+
+  const issueCols: CardCol[] = getIssueCols(allIssues);
 
   const onDragEnd = (result: any) => {
     const { destination, source, draggableId } = result;
@@ -51,32 +60,8 @@ const CardBlock = () => {
     endColumn = updatedEndColumn;
 
     setBoardData(boardData);
+    localStorage.setItem(url, JSON.stringify(boardData));
   };
-
-  const issueCols: CardCol[] = [
-    {
-      name: 'ToDo',
-      id: 'ToDo',
-      issues: allIssues?.filter(
-        (issue: FetchProps) =>
-          issue.state === 'open' && !issue.assignees.length,
-      ),
-    },
-    {
-      name: 'In Progress',
-      id: 'InProgress',
-      issues: allIssues?.filter(
-        (issue: FetchProps) => issue.state === 'open' && issue.assignees.length,
-      ),
-    },
-    {
-      name: 'Done',
-      id: 'Done',
-      issues: allIssues?.filter(
-        (issue: FetchProps) => issue.state === 'closed',
-      ),
-    },
-  ];
 
   return (
     <div style={{ width: '100%' }}>
