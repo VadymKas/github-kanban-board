@@ -1,9 +1,9 @@
-import { Col } from 'antd';
+import { Col, Flex } from 'antd';
 import { Droppable } from 'react-beautiful-dnd';
 import CardItem from '../CardItem';
 
 const colStyle = {
-  height: '83vh',
+  height: '83vh',  
   backgroundColor: '#ECECEC',
   borderRadius: '15px',
   padding: '16px',
@@ -18,11 +18,11 @@ const CardCol: React.FC<CardCol> = ({ name, id, issues }) => {
       md={12}
       lg={8}
       style={{ padding: '16px' }}>
-      <Col style={colStyle}>
-        <h2 style={{ textAlign: 'center' }}>{name}</h2>
+      <Flex style={colStyle} vertical align='center'>
+        <h2>{name}</h2>
         <Droppable droppableId={id}>
           {(provided) => (
-            <div
+            <div style={{flex: 1, width: '100%'}}
               ref={provided.innerRef}
               {...provided.droppableProps}>
               {issues?.map((issue, index) => (
@@ -36,7 +36,7 @@ const CardCol: React.FC<CardCol> = ({ name, id, issues }) => {
             </div>
           )}
         </Droppable>
-      </Col>
+      </Flex>
     </Col>
   );
 };
