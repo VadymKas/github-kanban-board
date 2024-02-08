@@ -3,7 +3,7 @@ import { Droppable } from 'react-beautiful-dnd';
 import CardItem from '../CardItem';
 
 const colStyle = {
-  height: '83vh',  
+  height: '76.5vh',  
   backgroundColor: '#ECECEC',
   borderRadius: '15px',
   padding: '16px',
