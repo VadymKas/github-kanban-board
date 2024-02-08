@@ -28,4 +28,6 @@ const getIssueCols = (issues: []): CardCol[] => {
   ];
 };
 
+
+
 export default getIssueCols;

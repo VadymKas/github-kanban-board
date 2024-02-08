@@ -48,6 +48,7 @@
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@types/react-beautiful-dnd": "^13.1.8",
-    "cypress": "^13.6.4"
+    "cypress": "^13.6.4",
+    "gh-pages": "^6.1.1"
   }
 }

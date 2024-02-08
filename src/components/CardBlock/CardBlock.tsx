@@ -36,6 +36,10 @@ const CardBlock: React.FC = () => {
       return;
     }
 
+    const draggedElem = document.getElementById(draggableId);
+    if (!draggedElem) return;
+    draggedElem.style.boxShadow = '';
+
     let startColumn = boardData?.find((col) => col.id === source.droppableId);
     let endColumn = boardData?.find(
       (col) => col.id === destination.droppableId,
@@ -66,9 +70,9 @@ const CardBlock: React.FC = () => {
   const onDragStart = (result: any) => {
     const { draggableId } = result;
 
-    const issue = document.getElementById(draggableId);
-    if (!issue) return;
-    issue.style.boxShadow = '0px 1px 10px 1px #1677ff';
+    const draggedElem = document.getElementById(draggableId);
+    if (!draggedElem) return;
+    draggedElem.style.boxShadow = '0px 1px 10px 1px #1677ff';
   };
 
   return (
