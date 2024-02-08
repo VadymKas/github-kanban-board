@@ -1,5 +1,6 @@
 {
   "name": "github-kanban-board",
+  "homepage": "https://VadymKas.github.io/github-kanban-board",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -25,7 +26,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "cypress run",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
