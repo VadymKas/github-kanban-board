@@ -20,13 +20,14 @@ const CardItem: React.FC<CardProps> = ({
           {...provided.draggableProps}
           {...provided.dragHandleProps}>
           <Card
+            className='card'
             title={title}
             bordered={false}
             style={{ width: '100%', margin: '16px 0' }}>
-            <p>
+            <p className='ant-card-body-info'>
               #{number} opened {calcDays(updated_at)} days ago
             </p>
-            <p>
+            <p className='ant-card-body-meta'>
               {user.type} | Comments: {comments}
             </p>
           </Card>

@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import {
   fetchIssues,
   setInputValue,
+  clearState,
   state,
 } from '../../redux/slices/issueSlice';
 import { useAppDispatch } from '../../redux/store';
@@ -24,6 +25,9 @@ const InputField: React.FC = () => {
 
   const inputValueHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setInputValue(e.target.value));
+    if (repoURL) {
+      dispatch(clearState());
+    }
   };
 
   const getIssues: SearchProps['onSearch'] = (value, _e) => {
@@ -32,7 +36,9 @@ const InputField: React.FC = () => {
   };
 
   return (
-    <Flex vertical>
+    <Flex
+      className='inputFiled'
+      vertical>
       <Space>
         <Search
           placeholder='Enter repo URL'

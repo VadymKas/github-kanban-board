@@ -64,7 +64,7 @@ const CardBlock: React.FC = () => {
   };
 
   return (
-    <div style={{ width: '100%' }}>
+    <div className='cardBlock' style={{ width: '100%' }}>
       <Row>
         <DragDropContext onDragEnd={onDragEnd}>
           {boardData?.map((col) => (

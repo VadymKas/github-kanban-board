@@ -8,7 +8,6 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/antd": "^1.0.0",
-    "@types/jest": "^27.5.2",
     "@types/node": "^16.18.79",
     "@types/react": "^18.2.53",
     "@types/react-dom": "^18.2.18",
@@ -25,7 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "cypress run",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -47,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "@types/jest": "^29.5.12",
     "@types/react-beautiful-dnd": "^13.1.8",
     "cypress": "^13.6.4"
   }

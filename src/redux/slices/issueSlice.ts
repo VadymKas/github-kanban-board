@@ -39,6 +39,11 @@ const issuesSlice = createSlice({
       state.input = action.payload;
       state.status = 'loading';
     },
+    clearState: (state) => {
+      state.url = '';
+      state.issues = [];
+      state.status = 'loading';
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -58,7 +63,7 @@ const issuesSlice = createSlice({
   },
 });
 
-export const { setInputValue } = issuesSlice.actions;
+export const { setInputValue, clearState } = issuesSlice.actions;
 
 export default issuesSlice.reducer;
 

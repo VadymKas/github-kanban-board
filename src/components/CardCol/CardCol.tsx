@@ -3,7 +3,7 @@ import { Droppable } from 'react-beautiful-dnd';
 import CardItem from '../CardItem';
 
 const colStyle = {
-  height: '76.5vh',  
+  height: '76.5vh',
   backgroundColor: '#ECECEC',
   borderRadius: '15px',
   padding: '16px',
@@ -17,12 +17,17 @@ const CardCol: React.FC<CardCol> = ({ name, id, issues }) => {
       xs={24}
       md={12}
       lg={8}
+      className='cardCol'
       style={{ padding: '16px' }}>
-      <Flex style={colStyle} vertical align='center'>
+      <Flex
+        style={colStyle}
+        vertical
+        align='center'>
         <h2>{name}</h2>
         <Droppable droppableId={id}>
           {(provided) => (
-            <div style={{flex: 1, width: '100%'}}
+            <div
+              style={{ flex: 1, width: '100%' }}
               ref={provided.innerRef}
               {...provided.droppableProps}>
               {issues?.map((issue, index) => (
