@@ -63,10 +63,22 @@ const CardBlock: React.FC = () => {
     localStorage.setItem(url, JSON.stringify(boardData));
   };
 
+  const onDragStart = (result: any) => {
+    const { draggableId } = result;
+
+    const issue = document.getElementById(draggableId);
+    if (!issue) return;
+    issue.style.boxShadow = '0px 1px 10px 1px #1677ff';
+  };
+
   return (
-    <div className='cardBlock' style={{ width: '100%' }}>
+    <div
+      className='cardBlock'
+      style={{ width: '100%' }}>
       <Row>
-        <DragDropContext onDragEnd={onDragEnd}>
+        <DragDropContext
+          onDragEnd={onDragEnd}
+          onDragStart={onDragStart}>
           {boardData?.map((col) => (
             <CardCol
               key={col.id}

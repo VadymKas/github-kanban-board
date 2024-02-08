@@ -20,6 +20,7 @@ const CardItem: React.FC<CardProps> = ({
           {...provided.draggableProps}
           {...provided.dragHandleProps}>
           <Card
+            id={String(number)}
             className='card'
             title={title}
             bordered={false}
